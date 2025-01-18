@@ -16,6 +16,11 @@
       "topic":"בדיקה",
       "url": "https://www.yad2.co.il/realestate/rent?topArea=2&area=1&city=5000&propertyGroup=apartments&rooms=-1-4.5&price=3000-15000&priceOnly=1",
       "disabled":false
+    },
+    {
+      "topic":"אופנועים",
+      "url":"https://www.yad2.co.il/vehicles/motorcycles?year=2005-2025",
+      "disabled":false
     }
   ]
 }
