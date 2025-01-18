@@ -1,6 +1,6 @@
 {
-  "telegramApiToken": null,
-  "chatId": null,
+  "telegramApiToken": API_TOKEN,
+  "chatId": CHAT_ID,
   "projects": [
     {
       "topic": "",
