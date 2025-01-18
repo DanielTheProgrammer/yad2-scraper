@@ -87,7 +87,7 @@ const scrape = async (topic, url) => {
     const chatId = process.env.CHAT_ID;
     const telenode = new Telenode({apiToken})
     try {
-        await telenode.sendTextMessage(`Starting scanning ${topic} on link:\n${url}`, chatId)
+        //await telenode.sendTextMessage(`Starting scanning ${topic} on link:\n${url}`, chatId)
         const scrapeImgResults = await scrapeItemsAndExtractImgUrls(url);
         const newItems = await checkIfHasNewItem(scrapeImgResults, topic);
         if (newItems.length > 0) {
@@ -95,7 +95,7 @@ const scrape = async (topic, url) => {
             const msg = `${newItems.length} new items:\n${newItemsJoined}`
             await telenode.sendTextMessage(msg, chatId);
         } else {
-            await telenode.sendTextMessage("No new items were added", chatId);
+            //await telenode.sendTextMessage("No new items were added", chatId);
         }
     } catch (e) {
         let errMsg = e?.message || "";
