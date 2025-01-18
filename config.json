@@ -3,8 +3,14 @@
   "chatId": CHAT_ID,
   "projects": [
     {
-      "topic": "",
-      "url": ""
+      "topic": "פריפריה תל אביב",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=204%2C1517%2C1516%2C1519%2C1462&propertyGroup=apartments&property=1%2C7%2C51%2C11%2C4&rooms=3-3&price=3850-6450&priceOnly=1&parking=1"
+      "disabled": false
+    },
+    {
+      "topic": "לב תל אביב",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=1483%2C1461%2C1520%2C1521%2C848&propertyGroup=apartments&property=1%2C7%2C51%2C11%2C4&rooms=3-3&price=3850-6450&priceOnly=1&parking=1",
+      "disabled": false
     }
   ]
 }
