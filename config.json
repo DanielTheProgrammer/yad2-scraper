@@ -1,6 +1,6 @@
 {
-  "telegramApiToken": API_TOKEN,
-  "chatId": CHAT_ID,
+  "telegramApiToken": "NA",
+  "chatId": "NA,
   "projects": [
     {
       "topic": "פריפריה תל אביב",
