@@ -18,7 +18,6 @@ const getYad2Response = async (url) => {
 
 const scrapeItemsAndExtractImgUrls = async (url) => {
     const yad2Html = await getYad2Response(url);
-    console.log(yad2Html);
     if (!yad2Html) {
         throw new Error("Could not get Yad2 response");
     }
