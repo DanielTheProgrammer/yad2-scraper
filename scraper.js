@@ -90,6 +90,7 @@ const scrape = async (topic, url) => {
         //await telenode.sendTextMessage(`Starting scanning ${topic} on link:\n${url}`, chatId)
         const scrapeImgResults = await scrapeItemsAndExtractImgUrls(url);
         console.log(scrapeImgResults);
+        console.log("---------------------------------------------------------------9999-9-9--9");
         const newItems = await checkIfHasNewItem(scrapeImgResults, topic);
         if (newItems.length > 0) {
             const newItemsJoined = newItems.join("\n----------\n");
