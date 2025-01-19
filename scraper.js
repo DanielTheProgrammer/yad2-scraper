@@ -49,7 +49,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
             imageUrls.push(imgSrc);
         }
     });
-
+    console.log(imageUrls)
     return imageUrls;
 };
 
