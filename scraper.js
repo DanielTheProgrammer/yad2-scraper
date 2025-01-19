@@ -22,25 +22,37 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
         throw new Error("Could not get Yad2 response");
     }
     const $ = cheerio.load(yad2Html);
-    const title = $("title")
+    const title = $("title");
     const titleText = title.first().text();
     if (titleText === "ShieldSquare Captcha") {
         throw new Error("Bot detection");
     }
-    const $feedItems = $(".feeditem").find(".pic");
-    console.log("items: "+$feedItems);
-    if (!$feedItems) {
+
+    // Select the items using the updated selector
+    const $feedItems = $(
+        "#__next > div > main > div.map-page-layout_feedBox__TgEg3 > div > div > div.container_container__l4ySK.map-feed_feedListContainer__KX5dg > ul > li"
+    );
+    console.log("Number of feed items found:", $feedItems.length);
+
+    if (!$feedItems || $feedItems.length === 0) {
         throw new Error("Could not find feed items");
     }
-    const imageUrls = []
+
+    const imageUrls = [];
     $feedItems.each((_, elm) => {
-        const imgSrc = $(elm).find("img").attr('src');
+        const imgSrc = $(elm)
+            .find(
+                "div > div > a > div > div.item-image_itemImageBox__rt4o8 > div > div.lambda-image_imageBox__LIf9n > img"
+            )
+            .attr("src");
         if (imgSrc) {
-            imageUrls.push(imgSrc)
+            imageUrls.push(imgSrc);
         }
-    })
+    });
+
     return imageUrls;
-}
+};
+
 
 const checkIfHasNewItem = async (imgUrls, topic) => {
     const filePath = `./data/${topic}.json`;
