@@ -49,7 +49,6 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
             imageUrls.push(imgSrc);
         }
     });
-    console.log(imageUrls)
     return imageUrls;
 };
 
@@ -60,6 +59,7 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
     try {
         savedUrls = require(filePath);
     } catch (e) {
+        console.log("here1");
         if (e.code === "MODULE_NOT_FOUND") {
             if (!fs.existsSync('data')) {
                 fs.mkdirSync('data');
@@ -70,11 +70,13 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
             throw new Error(`Could not read / create ${filePath}`);
         }
     }
+    console.log("here2");
     let shouldUpdateFile = false;
     savedUrls = savedUrls.filter(savedUrl => {
         shouldUpdateFile = true;
         return imgUrls.includes(savedUrl);
     });
+    console.log("here3");
     const newItems = [];
     imgUrls.forEach(url => {
         if (!savedUrls.includes(url)) {
@@ -102,8 +104,6 @@ const scrape = async (topic, url) => {
     try {
         //await telenode.sendTextMessage(`Starting scanning ${topic} on link:\n${url}`, chatId)
         const scrapeImgResults = await scrapeItemsAndExtractImgUrls(url);
-        console.log(scrapeImgResults);
-        console.log("---------------------------------------------------------------9999-9-9--9");
         const newItems = await checkIfHasNewItem(scrapeImgResults, topic);
         if (newItems.length > 0) {
             const newItemsJoined = newItems.join("\n----------\n");
