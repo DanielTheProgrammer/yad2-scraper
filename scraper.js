@@ -23,7 +23,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
     }
     const $ = cheerio.load(yad2Html);
     const title = $("title")
-    console.log(title);
+    console.log("title"+title);
     const titleText = title.first().text();
     console.log(titleText);
     if (titleText === "ShieldSquare Captcha") {
