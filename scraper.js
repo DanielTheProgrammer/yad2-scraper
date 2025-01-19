@@ -18,16 +18,20 @@ const getYad2Response = async (url) => {
 
 const scrapeItemsAndExtractImgUrls = async (url) => {
     const yad2Html = await getYad2Response(url);
+    console.log(yad2Html);
     if (!yad2Html) {
         throw new Error("Could not get Yad2 response");
     }
     const $ = cheerio.load(yad2Html);
     const title = $("title")
+    console.log(title);
     const titleText = title.first().text();
+    console.log(titleText);
     if (titleText === "ShieldSquare Captcha") {
         throw new Error("Bot detection");
     }
     const $feedItems = $(".feeditem").find(".pic");
+    console.log($feedItems);
     if (!$feedItems) {
         throw new Error("Could not find feed items");
     }
