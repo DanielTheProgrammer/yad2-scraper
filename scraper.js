@@ -23,14 +23,12 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
     }
     const $ = cheerio.load(yad2Html);
     const title = $("title")
-    console.log("title"+title);
     const titleText = title.first().text();
-    console.log(titleText);
     if (titleText === "ShieldSquare Captcha") {
         throw new Error("Bot detection");
     }
     const $feedItems = $(".feeditem").find(".pic");
-    console.log($feedItems);
+    console.log("items: "+$feedItems);
     if (!$feedItems) {
         throw new Error("Could not find feed items");
     }
