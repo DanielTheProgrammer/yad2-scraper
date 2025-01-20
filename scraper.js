@@ -61,6 +61,7 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
     } catch (e) {
         console.log("here1");
         if (e.code === "MODULE_NOT_FOUND") {
+            console.log("here1.5");
             fs.mkdirSync('data');
             fs.writeFileSync(filePath, '[]');
         } else {
@@ -83,7 +84,10 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
             shouldUpdateFile = true;
         }
     });
+        console.log("here4");
     if (shouldUpdateFile) {
+            console.log("here5");
+
         const updatedUrls = JSON.stringify(savedUrls, null, 2);
         fs.writeFileSync(filePath, updatedUrls);
         await createPushFlagForWorkflow();
