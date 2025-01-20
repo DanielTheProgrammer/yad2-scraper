@@ -117,7 +117,8 @@ const scrape = async (topic, url) => {
             const newItemsJoined = newItems.join("\n----------\n");
             const msg = `${newItems.length} new items:\n${newItemsJoined}`
                         console.log("here10");
-
+            console.log(msg);
+            console.log(chatId);
             await telenode.sendTextMessage(msg, chatId);
                         console.log("here11");
 
