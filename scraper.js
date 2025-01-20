@@ -106,11 +106,21 @@ const scrape = async (topic, url) => {
     try {
         //await telenode.sendTextMessage(`Starting scanning ${topic} on link:\n${url}`, chatId)
         const scrapeImgResults = await scrapeItemsAndExtractImgUrls(url);
+            console.log("here7");
+
         const newItems = await checkIfHasNewItem(scrapeImgResults, topic);
+                    console.log("here8");
+
         if (newItems.length > 0) {
+                        console.log("here9");
+
             const newItemsJoined = newItems.join("\n----------\n");
             const msg = `${newItems.length} new items:\n${newItemsJoined}`
+                        console.log("here10");
+
             await telenode.sendTextMessage(msg, chatId);
+                        console.log("here11");
+
         } else {
             //await telenode.sendTextMessage("No new items were added", chatId);
         }
