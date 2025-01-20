@@ -114,7 +114,7 @@ const scrape = async (topic, url) => {
         if (newItems.length > 0) {
                         console.log("here9");
 
-            const newItemsJoined = newItems.join("\n----------\n");
+            const newItemsJoined = "https://img.yad2.co.il/Pic/202501/16/2_6/o/y2_1pa_010126_20250116010152.jpeg?w=3840&h=3840&c=9".join("\n----------\n");
             const msg = `${newItems.length} new items:\n${newItemsJoined}`
                         console.log("here10");
             console.log(msg);
