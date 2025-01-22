@@ -57,15 +57,25 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
     const filePath = `./data/${topic}.json`;
     let savedUrls = [];
     try {
+        // Try to load the existing file
         savedUrls = require(filePath);
     } catch (e) {
         console.log("here1");
         if (e.code === "MODULE_NOT_FOUND") {
             console.log("here1.5");
-            fs.mkdirSync('data');
-            fs.writeFileSync(filePath, '[]');
+            try {
+                // Ensure the directory exists
+                if (!fs.existsSync('./data')) {
+                    fs.mkdirSync('./data', { recursive: true });
+                }
+                // Create the file with an empty array
+                fs.writeFileSync(filePath, JSON.stringify([]));
+            } catch (err) {
+                console.error(`Error creating directory or file: ${err.message}`);
+                throw new Error(`Could not initialize ${filePath}`);
+            }
         } else {
-            console.log(e);
+            console.error(e);
             throw new Error(`Could not read / create ${filePath}`);
         }
     }
