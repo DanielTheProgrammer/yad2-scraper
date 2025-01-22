@@ -96,6 +96,8 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
     const newItems = [];
     imgUrls.forEach(url => {
         if (!savedUrls.includes(url)) {
+            console.log("here3.5");
+            console.log(url);
             savedUrls.push(url);
             newItems.push(url);
             shouldUpdateFile = true;
