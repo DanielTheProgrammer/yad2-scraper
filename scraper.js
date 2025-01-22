@@ -86,6 +86,12 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
         shouldUpdateFile = true;
         return imgUrls.includes(savedUrl);
     });
+    savedUrls.forEach((item, index) => {
+    console.log(`Index ${index}: ${item}`);
+    });
+    imgUrls.forEach((item, index) => {
+    console.log(`Index ${index}: ${item}`);
+    });
     console.log("here3");
     const newItems = [];
     imgUrls.forEach(url => {
