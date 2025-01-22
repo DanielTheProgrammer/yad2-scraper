@@ -30,7 +30,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
 
     // Select the items using the updated selector
     const $feedItems = $(
-        "#__next > div > main > div.map-page-layout_feedBox__TgEg3 > div > div > div.container_container__l4ySK.map-feed_feedListContainer__KX5dg > ul > li"
+        "li[data-testid=\"item-basic\"]"
     );
     console.log("Number of feed items found:", $feedItems.length);
 
@@ -42,9 +42,9 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
     $feedItems.each((_, elm) => {
         const imgSrc = $(elm)
             .find(
-                "div > div > a > div > div.item-image_itemImageBox__rt4o8 > div > div.lambda-image_imageBox__LIf9n > img"
+                "div > div > a"
             )
-            .attr("src");
+            .attr("href");
         if (imgSrc) {
             imageUrls.push(imgSrc);
         }
