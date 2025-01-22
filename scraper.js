@@ -34,7 +34,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
     );
     console.log("Number of feed items found:", $feedItems.length);
 
-    if (!$feedItems || $feedItems.length === 0) {
+    if (!$feedItems) {
         throw new Error("Could not find feed items");
     }
 
