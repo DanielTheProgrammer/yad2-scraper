@@ -40,7 +40,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
 
     const imageUrls = [];
     $feedItems.each((_, elm) => {
-        const imgSrc = $(elm)
+        const imgSrc = "https://www.yad2.co.il" + $(elm)
             .find(
                 "div > div > a"
             )
