@@ -44,37 +44,51 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
 const checkIfHasNewItem = async (imgUrls, topic) => {
     const filePath = `./data/${topic}.json`;
     let savedUrls = [];
+    let shouldUpdateFile = false;
+
+    // Step 1: Read or create the JSON file
     try {
-        savedUrls = require(filePath);
+        savedUrls = require(filePath); // Load saved URLs
     } catch (e) {
         if (e.code === "MODULE_NOT_FOUND") {
-            fs.mkdirSync('data');
+            // Create 'data' directory and empty JSON file if it doesn't exist
+            if (!fs.existsSync('data')) {
+                fs.mkdirSync('data');
+            }
             fs.writeFileSync(filePath, '[]');
         } else {
-            console.log(e);
-            throw new Error(`Could not read / create ${filePath}`);
+            console.error(e);
+            throw new Error(`Could not read or create file at ${filePath}`);
         }
     }
-    let shouldUpdateFile = false;
-    savedUrls = savedUrls.filter(savedUrl => {
+
+    // Step 2: Filter out URLs no longer in imgUrls
+    const originalSavedUrls = [...savedUrls];
+    savedUrls = savedUrls.filter(savedUrl => imgUrls.includes(savedUrl));
+    if (savedUrls.length !== originalSavedUrls.length) {
         shouldUpdateFile = true;
-        return imgUrls.includes(savedUrl);
-    });
+    }
+
+    // Step 3: Add new URLs to savedUrls
     const newItems = [];
     imgUrls.forEach(url => {
         if (!savedUrls.includes(url)) {
             savedUrls.push(url);
             newItems.push(url);
-            shouldUpdateFile = true;
+            shouldUpdateFile = true; // Mark file for update
         }
     });
+
+    // Step 4: Write updated URLs to the file if needed
     if (shouldUpdateFile) {
         const updatedUrls = JSON.stringify(savedUrls, null, 2);
         fs.writeFileSync(filePath, updatedUrls);
-        await createPushFlagForWorkflow();
+        await createPushFlagForWorkflow(); // Trigger workflow if file was updated
     }
+
+    // Return the list of new items
     return newItems;
-}
+};
 
 const createPushFlagForWorkflow = () => {
     fs.writeFileSync("push_me", "")
