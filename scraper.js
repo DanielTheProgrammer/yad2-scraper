@@ -47,6 +47,7 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
             .attr("href");
         if (imgSrc) {
             imageUrls.push(imgSrc);
+            console.log(imgSrc);
         }
     });
     return imageUrls;
