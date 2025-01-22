@@ -57,61 +57,51 @@ const scrapeItemsAndExtractImgUrls = async (url) => {
 const checkIfHasNewItem = async (imgUrls, topic) => {
     const filePath = `./data/${topic}.json`;
     let savedUrls = [];
+    let shouldUpdateFile = false;
+
+    // Step 1: Read or create the JSON file
     try {
-        // Try to load the existing file
-        savedUrls = require(filePath);
+        savedUrls = require(filePath); // Load saved URLs
     } catch (e) {
-        console.log("here1");
         if (e.code === "MODULE_NOT_FOUND") {
-            console.log("here1.5");
-            try {
-                // Ensure the directory exists
-                if (!fs.existsSync('./data')) {
-                    fs.mkdirSync('./data', { recursive: true });
-                }
-                // Create the file with an empty array
-                fs.writeFileSync(filePath, JSON.stringify([]));
-            } catch (err) {
-                console.error(`Error creating directory or file: ${err.message}`);
-                throw new Error(`Could not initialize ${filePath}`);
+            // Create 'data' directory and empty JSON file if it doesn't exist
+            if (!fs.existsSync('data')) {
+                fs.mkdirSync('data');
             }
+            fs.writeFileSync(filePath, '[]');
         } else {
             console.error(e);
-            throw new Error(`Could not read / create ${filePath}`);
+            throw new Error(`Could not read or create file at ${filePath}`);
         }
     }
-    console.log("here2");
-    let shouldUpdateFile = false;
-    savedUrls = savedUrls.filter(savedUrl => {
+
+    // Step 2: Filter out URLs no longer in imgUrls
+    const originalSavedUrls = [...savedUrls];
+    savedUrls = savedUrls.filter(savedUrl => imgUrls.includes(savedUrl));
+    if (savedUrls.length !== originalSavedUrls.length) {
         shouldUpdateFile = true;
-        return imgUrls.includes(savedUrl);
-    });
-    savedUrls.forEach((item, index) => {
-    console.log(`Index ${index}: ${item}`);
-    });
-    imgUrls.forEach((item, index) => {
-    console.log(`Index ${index}: ${item}`);
-    });
-    console.log("here3");
+    }
+
+    // Step 3: Add new URLs to savedUrls
     const newItems = [];
     imgUrls.forEach(url => {
         if (!savedUrls.includes(url)) {
-            console.log("here3.5");
-            console.log(url);
             savedUrls.push(url);
             newItems.push(url);
-            shouldUpdateFile = true;
+            shouldUpdateFile = true; // Mark file for update
         }
     });
-        console.log("here4");
+
+    // Step 4: Write updated URLs to the file if needed
     if (shouldUpdateFile) {
-        console.log("here5");
         const updatedUrls = JSON.stringify(savedUrls, null, 2);
         fs.writeFileSync(filePath, updatedUrls);
-        await createPushFlagForWorkflow();
+        await createPushFlagForWorkflow(); // Trigger workflow if file was updated
     }
+
+    // Return the list of new items
     return newItems;
-}
+};
 
 const createPushFlagForWorkflow = () => {
     fs.writeFileSync("push_me", "")
