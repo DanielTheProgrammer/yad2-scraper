@@ -3,8 +3,23 @@
   "chatId": "NA",
   "projects": [
     {
-      "topic": "לב תל אביב",
-      "url": "https://www.yad2.co.il/realestate/rent?topArea=2&area=1&city=5000&neighborhood=1520&rooms=3-3",
+      "topic": "לב תל אביב | 1.5-2 חדרים | עד 4250₪",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=1483%2C1461%2C1520%2C1521%2C848&propertyGroup=apartments&property=1%2C7%2C49%2C51%2C11%2C4&rooms=1.5-2&price=-1-4250&squaremeter=35--1&imageOnly=1&priceOnly=1",
+      "disabled": false
+    },
+    {
+      "topic": "פריפריה תל אביב | 2.5-3 חדרים | עד 6150₪",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=1483%2C1461%2C1520%2C1521%2C848&propertyGroup=apartments&property=1%2C7%2C49%2C51%2C11%2C4&rooms=2.5-3&price=-1-6150&squaremeter=50--1&imageOnly=1&priceOnly=1&parking=1",
+      "disabled": false
+    },
+    {
+      "topic": "פריפריה תל אביב | 2.5-3 חדרים | עד 6150₪",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=204%2C1517%2C1516%2C1519%2C1462&propertyGroup=apartments&property=1%2C7%2C49%2C51%2C11%2C4&rooms=2.5-3&price=2500-6150&squaremeter=50--1&imageOnly=1&priceOnly=1&parking=1",
+      "disabled": false
+    },
+    {
+      "topic": "פריפריה תל אביב | 1.5-2 חדרים | עד 4250₪",
+      "url": "https://www.yad2.co.il/realestate/rent?multiNeighborhood=204%2C1517%2C1516%2C1519%2C1462&propertyGroup=apartments&property=1%2C7%2C49%2C51%2C11%2C4&rooms=1.5-2&price=-1-4250&squaremeter=50--1&imageOnly=1&priceOnly=1",
       "disabled": false
     }
   ]
