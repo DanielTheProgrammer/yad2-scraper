@@ -96,8 +96,7 @@ const checkIfHasNewItem = async (imgUrls, topic) => {
     });
         console.log("here4");
     if (shouldUpdateFile) {
-            console.log("here5");
-
+        console.log("here5");
         const updatedUrls = JSON.stringify(savedUrls, null, 2);
         fs.writeFileSync(filePath, updatedUrls);
         await createPushFlagForWorkflow();
